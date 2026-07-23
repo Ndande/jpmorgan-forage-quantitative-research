@@ -3,7 +3,11 @@ import matplotlib.pyplot as plt
 from prophet import Prophet
 
 class NaturalGasPricer:
-    
+    """
+    Estimates and forecasts natural gas prices using Meta's Prophet library.
+    Supports price estimation for any date including interpolation and 
+    24-month forward forecasting with seasonal pattern recognition.
+    """
     def __init__(self, data_path):
         self.data_path = data_path
         self.model = None
@@ -22,7 +26,7 @@ class NaturalGasPricer:
         yearly_seasonality=True,
         weekly_seasonality=False,
         daily_seasonality=False
-        )
+    )
         self.model.fit(self.prophet_df)
     
     def get_price(self, date_str):
@@ -56,9 +60,7 @@ class NaturalGasPricer:
         plt.show()
 
 if __name__ == "__main__":
-    pricer = NaturalGasPricer(
-        r'C:\Users\ndand\data_pipeline\ncm warehouse project\jp_morgan_chase\Nat_Gas.csv'
-    )
+    pricer = NaturalGasPricer('Nat_Gas.csv')
     pricer.forecast()
     pricer.plot()
     
